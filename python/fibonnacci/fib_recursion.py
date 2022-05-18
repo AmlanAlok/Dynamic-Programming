@@ -9,12 +9,40 @@ def fib(n):
     return fib(n-1) + fib(n-2)
 
 
+def fib_memo(n, memo = {}):
+
+    if n in memo:
+        return memo[n]
+
+    if n<=2:
+        return 1
+
+    memo[n] = fib_memo(n-1, memo) + fib_memo(n-2, memo)
+
+    return memo[n]
+
+
 class MyTestCase(unittest.TestCase):
 
     def test_something(self):
 
         self.assertEqual(8, fib(6))
         self.assertEqual(13, fib(7))
+
+    ''' This fib(50) will take a long time with classic recursion method'''
+    def test_02(self):
+        print('hello')
+        # print(fib(50))
+        # self.assertEqual(8, fib(6))
+
+    ''' This test uses the fib_memo logic and it is very fast'''
+    def test_03(self):
+
+        self.assertEqual(8, fib_memo(6))
+        self.assertEqual(13, fib_memo(7))
+        self.assertEqual(12586269025, fib_memo(50))
+        # print(fib_memo(50))
+
 
 
 if __name__ == '__main__':
