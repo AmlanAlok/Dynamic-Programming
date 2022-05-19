@@ -1,6 +1,15 @@
 import unittest
 
 
+'''
+Problem 1: Fibonacci Sequence
+
+Fib has TC = 2^n and SC = n
+
+Fib_memo has TC = n and SC = n
+'''
+
+
 def fib(n):
 
     if n <= 2:
