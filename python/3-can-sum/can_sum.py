@@ -20,8 +20,9 @@ def can_sum(target_sum, numbers):
 class MyTestCase(unittest.TestCase):
 
     def test_01(self):
-
-        pass
+        self.assertEqual(True, can_sum(7, [5, 3, 4, 7]))
+        self.assertEqual(True, can_sum(7, [2, 3]))
+        self.assertEqual(False, can_sum(7, [2, 4]))
 
 
 
