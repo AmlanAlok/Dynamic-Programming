@@ -19,6 +19,28 @@ def how_sum(target_sum, numbers):
     return ans
 
 
+def how_sum_memo(target_sum, numbers, memo={}):
+
+    if target_sum in memo:
+        return memo[target_sum]
+    if target_sum == 0:
+        return []
+    if target_sum < 0:
+        return None
+
+    for n in numbers:
+        remainder = target_sum - n
+
+        ans = how_sum_memo(remainder, numbers, memo)
+        memo[remainder] = ans
+
+        if ans is not None:
+            # memo[remainder] = ans + [n]
+            return memo[remainder] + [n]             # ans.append(n) returns None
+
+    return None
+
+
 class MyTestCase(unittest.TestCase):
 
     def test_01(self):
