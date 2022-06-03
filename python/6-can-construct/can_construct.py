@@ -23,6 +23,18 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(False, can_construct("skateboard", ["skat", "te", "bor", "ard"]))
         pass
 
+    def test_03(self):
+        self.assertEqual(True, can_construct('eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef', [
+            'e',
+            'ee',
+            'eee',
+            'eeee',
+            'eeeee',
+            'eeeeee',
+            'eeeeeee',
+            'eeeeeeee'
+        ]))
+
 
 if __name__ == '__main__':
     unittest.main()
