@@ -26,8 +26,10 @@ def best_sum(target_sum, numbers):
 
 class MyTestCase(unittest.TestCase):
 
-    def test_something(self):
+    def test_01(self):
         self.assertEqual([7], best_sum(7, [5, 3, 4, 7]))
+        self.assertEqual([5, 3], best_sum(8, [2, 3, 5]))
+        self.assertEqual([4, 4], best_sum(8, [1, 4, 5]))
         # print(best_sum(7, [5, 3, 4, 7]))
 
 
