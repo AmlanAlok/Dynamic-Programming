@@ -29,6 +29,32 @@ def best_sum(target_sum, numbers):
     return shortest_ans
 
 
+def best_sum_memo(target_sum, numbers, memo={}):
+
+    if target_sum in memo:
+        return memo[target_sum]
+    if target_sum == 0:
+        return []
+    if target_sum < 0:
+        return None
+
+    shortest_ans = None
+
+    for n in numbers:
+        remainder = target_sum - n
+        # ans.append(n)
+
+        ans = best_sum_memo(remainder, numbers, memo)
+        if ans is not None:
+            # in the worst case this operation will take m steps
+            new_ans = ans + [n]         # ans.append(n) returns None
+            if shortest_ans is None or len(new_ans) < len(shortest_ans):
+                shortest_ans = new_ans
+
+    memo[target_sum] = shortest_ans
+    return shortest_ans
+
+
 class MyTestCase(unittest.TestCase):
 
     def test_01(self):
@@ -37,8 +63,11 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual([4, 4], best_sum(8, [1, 4, 5]))
         # print(best_sum(7, [5, 3, 4, 7]))
 
+    ''' This will take a very long time '''
     def test_03(self):
         self.assertEqual([25, 25, 25, 25], best_sum(100, [1, 2, 5, 25]))
+
+
 
 
 if __name__ == '__main__':
