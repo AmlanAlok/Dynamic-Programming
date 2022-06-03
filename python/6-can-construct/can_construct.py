@@ -18,9 +18,9 @@ def can_construct(target, word_bank):
 
 class MyTestCase(unittest.TestCase):
 
-    def test_something(self):
-        # self.assertEqual(True, can_construct('abcdef', ['ab', 'abc', 'cd', 'def', 'abcd']))
-        # self.assertEqual(False, can_construct("skateboard", ["skat", "te", "bor", "ard"]))
+    def test_01(self):
+        self.assertEqual(True, can_construct('abcdef', ['ab', 'abc', 'cd', 'def', 'abcd']))
+        self.assertEqual(False, can_construct("skateboard", ["skat", "te", "bor", "ard"]))
         pass
 
 
