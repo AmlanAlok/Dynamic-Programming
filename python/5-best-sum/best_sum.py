@@ -1,5 +1,10 @@
 import unittest
 
+'''
+TC = n^m + m
+SC = m * m = m^2
+'''
+
 
 def best_sum(target_sum, numbers):
 
