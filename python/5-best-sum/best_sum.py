@@ -42,7 +42,6 @@ def best_sum_memo(target_sum, numbers, memo={}):
 
     for n in numbers:
         remainder = target_sum - n
-        # ans.append(n)
 
         ans = best_sum_memo(remainder, numbers, memo)
         if ans is not None:
@@ -61,13 +60,13 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual([7], best_sum(7, [5, 3, 4, 7]))
         self.assertEqual([5, 3], best_sum(8, [2, 3, 5]))
         self.assertEqual([4, 4], best_sum(8, [1, 4, 5]))
-        # print(best_sum(7, [5, 3, 4, 7]))
 
     ''' This will take a very long time '''
     def test_03(self):
         self.assertEqual([25, 25, 25, 25], best_sum(100, [1, 2, 5, 25]))
 
-
+    def test_04(self):
+        self.assertEqual([25, 25, 25, 25], best_sum_memo(100, [1, 2, 5, 25]))
 
 
 if __name__ == '__main__':
