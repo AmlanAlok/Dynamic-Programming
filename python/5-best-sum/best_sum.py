@@ -32,6 +32,9 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual([4, 4], best_sum(8, [1, 4, 5]))
         # print(best_sum(7, [5, 3, 4, 7]))
 
+    def test_03(self):
+        self.assertEqual([25, 25, 25, 25], best_sum(100, [1, 2, 5, 25]))
+
 
 if __name__ == '__main__':
     unittest.main()
