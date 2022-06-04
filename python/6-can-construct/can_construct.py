@@ -27,10 +27,11 @@ def can_construct_memo(target, word_bank, memo={}):
         if target.find(x) == 0:
             suffix = target[len(x):]
 
-            memo[suffix] = can_construct_memo(suffix, word_bank, memo)
-            if memo[suffix]:
+            memo[target] = can_construct_memo(suffix, word_bank, memo)
+            if memo[target]:
                 return True
 
+    memo[target] = False
     return False
 
 
