@@ -26,6 +26,7 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(1, count_construct('abcdef', ['ab', 'abc', 'cd', 'def', 'abcd']))
         self.assertEqual(2, count_construct('abcdef', ['a', 'abc', 'cd', 'def', 'abcd', 'ef']))
         self.assertEqual(3, count_construct('abcdef', ['ab', 'abc', 'cd', 'def', 'abcd', 'ef']))
+        self.assertEqual(0, count_construct("skateboard", ["skat", "te", "bor", "ard"]))
 
 
 if __name__ == '__main__':
