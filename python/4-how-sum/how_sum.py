@@ -1,5 +1,10 @@
 import unittest
 
+'''
+TC = O(n^m * m)
+SC = O(2m) = O(m)
+'''
+
 
 def how_sum(target_sum, numbers):
 
@@ -14,9 +19,16 @@ def how_sum(target_sum, numbers):
 
         ans = how_sum(remainder, numbers)
         if ans is not None:
+            # in the worst case this operation will take m steps
             return ans + [n]                # ans.append(n) returns None
 
     return ans
+
+
+'''
+TC = O(n * m * m)
+SC = O(m^2)
+'''
 
 
 def how_sum_memo(target_sum, numbers, memo={}):
