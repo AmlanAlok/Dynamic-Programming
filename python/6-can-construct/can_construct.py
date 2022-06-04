@@ -16,6 +16,24 @@ def can_construct(target, word_bank):
     return False
 
 
+def can_construct_memo(target, word_bank, memo={}):
+
+    if target in memo:
+        return memo[target]
+    if target == '':
+        return True
+
+    for x in word_bank:
+        if x[0] == target[0]:
+            suffix = target[len(x):]
+
+            memo[suffix] = can_construct(suffix, word_bank)
+            if memo[suffix]:
+                return True
+
+    return False
+
+
 class MyTestCase(unittest.TestCase):
 
     def test_01(self):
