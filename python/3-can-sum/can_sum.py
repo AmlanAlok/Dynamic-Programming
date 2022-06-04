@@ -1,5 +1,15 @@
 import unittest
 
+'''
+
+height of tree = m
+number of children = n
+
+can_sum TC = n^m and SC = m
+
+can_sum_memo Tc = m*n and SC = m
+
+'''
 
 def can_sum(target_sum, numbers):
 
