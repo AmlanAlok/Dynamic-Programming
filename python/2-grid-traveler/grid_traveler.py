@@ -7,6 +7,8 @@ Grid Traveler
 grid_traveler has TC = 2^(m+n) and SC = m+n
 
 grid_traveler_memo has TC = m*n and SC = m+n
+
+We are going to have m*n distinct nodes when using memoization
 '''
 
 
