@@ -12,9 +12,7 @@ def count_construct(target, word_bank):
         if target.find(x) == 0:
             suffix = target[len(x):]
             p = count_construct(suffix, word_bank)
-
-            if p is not None:
-                total += p
+            total += p
 
     return total
 
@@ -32,9 +30,7 @@ def count_construct_memo(target, word_bank, memo={}):
         if target.find(x) == 0:
             suffix = target[len(x):]
             p = count_construct_memo(suffix, word_bank, memo)
-
-            if p is not None:
-                total += p
+            total += p
 
     memo[target] = total
     return total
