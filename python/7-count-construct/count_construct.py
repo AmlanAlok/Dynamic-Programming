@@ -62,6 +62,31 @@ class MyTestCase(unittest.TestCase):
 
         # print(count_construct_memo('abcdef', ['a', 'abc', 'cd', 'def', 'abcd', 'ef']))
 
+    ''' This will not work'''
+    def test_06(self):
+        self.assertEqual(0, count_construct('eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef', [
+            'e',
+            'ee',
+            'eee',
+            'eeee',
+            'eeeee',
+            'eeeeee',
+            'eeeeeee',
+            'eeeeeeee'
+        ]))
+
+    ''' This uses memoization and hence will work '''
+    def test_07(self):
+        self.assertEqual(0, count_construct_memo('eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef', [
+            'e',
+            'ee',
+            'eee',
+            'eeee',
+            'eeeee',
+            'eeeeee',
+            'eeeeeee',
+            'eeeeeeee'
+        ]))
 
 if __name__ == '__main__':
     unittest.main()
