@@ -49,6 +49,23 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(3, count_construct('abcdef', ['ab', 'abc', 'cd', 'def', 'abcd', 'ef']))
         self.assertEqual(0, count_construct("skateboard", ["skat", "te", "bor", "ard"]))
 
+    def test_02(self):
+        # self.assertEqual(True, True)
+        # self.assertEqual(1, count_construct_memo('abcdef', ['ab', 'abc', 'cd', 'def', 'abcd']))
+        self.assertEqual(2, count_construct_memo('abcdef', ['a', 'abc', 'cd', 'def', 'abcd', 'ef']))
+
+    def test_03(self):
+        self.assertEqual(1, count_construct_memo('abcdef', ['ab', 'abc', 'cd', 'def', 'abcd']))
+        print(count_construct_memo('abcdef', ['ab', 'abc', 'cd', 'def', 'abcd']))
+
+    def test_04(self):
+        self.assertEqual(3, count_construct_memo('abcdef', ['ab', 'abc', 'cd', 'def', 'abcd', 'ef']))
+
+    def test_05(self):
+        self.assertEqual(0, count_construct_memo("skateboard", ["skat", "te", "bor", "ard"]))
+
+        # print(count_construct_memo('abcdef', ['a', 'abc', 'cd', 'def', 'abcd', 'ef']))
+
 
 if __name__ == '__main__':
     unittest.main()
