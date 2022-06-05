@@ -19,6 +19,27 @@ def count_construct(target, word_bank):
     return total
 
 
+def count_construct_memo(target, word_bank, memo={}):
+
+    if target in memo:
+        return memo[target]
+    if target == '':
+        return 1
+
+    total = 0
+
+    for x in word_bank:
+        if target.find(x) == 0:
+            suffix = target[len(x):]
+            p = count_construct_memo(suffix, word_bank, memo)
+
+            if p is not None:
+                total += p
+
+    memo[target] = total
+    return total
+
+
 class MyTestCase(unittest.TestCase):
 
     def test_01(self):
