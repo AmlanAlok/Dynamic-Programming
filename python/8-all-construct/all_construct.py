@@ -17,8 +17,6 @@ def all_construct(target, word_bank):
             for a in p:
                 a.insert(0, x)
 
-            # if p is not None:
-            # f = p[0] + [x]
             for b in p:
                 ans.append(b)
 
@@ -32,9 +30,36 @@ def all_construct(target, word_bank):
 
 class MyTestCase(unittest.TestCase):
 
-    def test_something(self):
+    def test_01(self):
         # self.assertEqual(True, False)
-        print(all_construct('abcdef', ['abc', 'cd', 'def', 'abcd', 'ef', 'd']))
+        self.assertEqual([
+            ['abc', 'def'],
+            ['abc', 'd', 'ef'],
+            ['abcd', 'ef']
+        ],  all_construct('abcdef', ['abc', 'cd', 'def', 'abcd', 'ef', 'd']))
+        self.assertEqual([
+            ['purp', 'le'],
+            ['p', 'ur', 'p', 'le']
+        ], all_construct("purple", ['purp', 'p', 'ur', 'le', 'purpl']))
+        self.assertEqual([
+            ['ab', 'cd', 'ef'],
+            ['ab', 'c', 'def'],
+            ['abc', 'def'],
+            ['abcd', 'ef']
+        ], all_construct("abcdef", ['ab', 'abc', 'cd', 'def', 'abcd', 'ef', 'c']))
+        # self.assertEqual(True, False)
+        # self.assertEqual(True, False)
+
+    def test_02(self):
+        print(all_construct("eeeeeeeeeeeeeeef", [
+    'e',
+    'ee',
+    'eee',
+    'eeee',
+    'eeeee',
+    'eeeeee',
+    'eeeeeee',
+    'eeeeeeee']))
 
 
 if __name__ == '__main__':
