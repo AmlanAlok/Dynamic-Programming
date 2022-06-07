@@ -70,7 +70,36 @@ class MyTestCase(unittest.TestCase):
         # self.assertEqual(True, False)
         # self.assertEqual(True, False)
 
+    def test_02(self):
+        print(all_construct("eeeeeeeeeeeeeeef", [
+            'e',
+            'ee',
+            'eee',
+            'eeee',
+            'eeeee',
+            'eeeeee',
+            'eeeeeee',
+            'eeeeeeee']))
 
+    def test_03(self):
+        # self.assertEqual(True, False)
+        self.assertEqual([
+            ['abc', 'def'],
+            ['abc', 'd', 'ef'],
+            ['abcd', 'ef']
+        ],  all_construct_memo('abcdef', ['abc', 'cd', 'def', 'abcd', 'ef', 'd']))
+
+    def test_04(self):
+        self.assertEqual([
+            ['purp', 'le'],
+            ['p', 'ur', 'p', 'le']
+        ], all_construct_memo("purple", ['purp', 'p', 'ur', 'le', 'purpl']))
+        self.assertEqual([
+            ['ab', 'cd', 'ef'],
+            ['ab', 'c', 'def'],
+            ['abc', 'def'],
+            ['abcd', 'ef']
+        ], all_construct_memo("abcdef", ['ab', 'abc', 'cd', 'def', 'abcd', 'ef', 'c']))
 
 
 if __name__ == '__main__':
