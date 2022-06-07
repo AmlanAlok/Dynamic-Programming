@@ -23,9 +23,29 @@ def all_construct(target, word_bank):
     return ans
 
 
+def all_construct_memo(target, word_bank, memo={}):
 
+    if target in memo:
+        return memo[target]
+    if target == '':
+        return [[]]
 
+    ans = []
 
+    for x in word_bank:
+
+        if target.find(x) == 0:
+            suffix = target[len(x):]
+            p = all_construct_memo(suffix, word_bank, memo)
+
+            for a in p:
+                a.insert(0, x)
+
+            for b in p:
+                ans.append(b)
+
+    memo[target] = ans
+    return ans
 
 
 class MyTestCase(unittest.TestCase):
@@ -50,16 +70,7 @@ class MyTestCase(unittest.TestCase):
         # self.assertEqual(True, False)
         # self.assertEqual(True, False)
 
-    def test_02(self):
-        print(all_construct("eeeeeeeeeeeeeeef", [
-    'e',
-    'ee',
-    'eee',
-    'eeee',
-    'eeeee',
-    'eeeeee',
-    'eeeeeee',
-    'eeeeeeee']))
+
 
 
 if __name__ == '__main__':
