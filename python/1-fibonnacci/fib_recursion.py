@@ -31,6 +31,17 @@ def fib_memo(n, memo = {}):
     return memo[n]
 
 
+def fib_table(n):
+
+    nums = [0] * (n+1)
+    nums[1] = 1
+
+    for i in range(2, len(nums)):
+        nums[i] = nums[i-1] + nums[i-2]
+
+    return nums[n]
+
+
 class MyTestCase(unittest.TestCase):
 
     def test_something(self):
@@ -46,7 +57,6 @@ class MyTestCase(unittest.TestCase):
 
     ''' This test uses the fib_memo logic and it is very fast'''
     def test_03(self):
-
         self.assertEqual(8, fib_memo(6))
         self.assertEqual(13, fib_memo(7))
         self.assertEqual(12586269025, fib_memo(50))
