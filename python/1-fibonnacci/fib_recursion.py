@@ -62,6 +62,10 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(12586269025, fib_memo(50))
         # print(fib_memo(50))
 
+    def test_table_01(self):
+        self.assertEqual(8, fib_table(6))
+        self.assertEqual(13, fib_table(7))
+        self.assertEqual(12586269025, fib_table(50))
 
 
 if __name__ == '__main__':
