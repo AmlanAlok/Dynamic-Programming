@@ -18,14 +18,18 @@ class Node:
     def dfs_rec(self, node):
 
         if node is None:
-            return
+            return []
 
-        print(node.val)
+        # print(node.val)
 
-        if node.left:
-            self.dfs_rec(node.left)
-        if node.right:
-            self.dfs_rec(node.right)
+        # if node.left:
+        left_val = self.dfs_rec(node.left)
+        # if node.right:
+        right_val = self.dfs_rec(node.right)
+
+        return [node.val] + left_val + right_val      # right way
+        # return [node.val] + [left_val] + [right_val]    # Incorrect way
+        # return
 
     ''' Stack DFS '''
     def dfs_stack(self, node):
@@ -67,8 +71,8 @@ def run():
     b.right = e
     c.right = f
 
-    # a.dfs_rec(a)
-    ans = a.dfs_stack(a)
+    ans = a.dfs_rec(a)
+    # ans = a.dfs_stack(a)
     print(ans)
     pass
 
