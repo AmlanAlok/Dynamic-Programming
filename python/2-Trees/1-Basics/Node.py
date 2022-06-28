@@ -27,6 +27,25 @@ class Node:
         if node.right:
             self.dfs_rec(node.right)
 
+    ''' Stack DFS '''
+    def dfs_stack(self, node):
+        from collections import deque
+        stack = deque()
+
+        stack.append(node)
+
+        while len(stack) != 0:
+
+            last_node = stack.pop()
+            print(last_node.val)
+
+            if last_node.right:
+                stack.append(last_node.right)
+            if last_node.left:
+                stack.append(last_node.left)
+
+        return
+
 
 def run():
     a = Node('a')
@@ -42,7 +61,8 @@ def run():
     b.right = e
     c.right = f
 
-    a.dfs_rec(a)
+    # a.dfs_rec(a)
+    a.dfs_stack(a)
     pass
 
 
