@@ -83,27 +83,52 @@ SC = n
 '''
 
 
-def bfs_stack(node):
+def bfs_queue(node):
     if node is None:
         return []
 
     from collections import deque
-    stack = deque()
+    queue = deque()
     result = []
 
-    stack.append(node)
+    queue.append(node)
 
-    while len(stack) > 0:
+    while len(queue) > 0:
 
-        last_node = stack.popleft()
-        result.append(last_node.val)
+        first_node = queue.popleft()
+        result.append(first_node.val)
 
-        if last_node.left:
-            stack.append(last_node.left)
-        if last_node.right:
-            stack.append(last_node.right)
+        if first_node.left:
+            queue.append(first_node.left)
+        if first_node.right:
+            queue.append(first_node.right)
 
     return result
+
+
+def bfs_includes(node, c):
+
+    if node is None:
+        return []
+
+    from collections import deque
+    queue = deque()
+
+    queue.append(node)
+
+    while len(queue) > 0:
+
+        first_node = queue.popleft()
+
+        if first_node.val == c:
+            return True
+
+        if first_node.left:
+            queue.append(first_node.left)
+        if first_node.right:
+            queue.append(first_node.right)
+
+    return False
 
 
 class MyTestCase(unittest.TestCase):
@@ -118,10 +143,20 @@ class MyTestCase(unittest.TestCase):
         # print(ans)
         self.assertEqual(['a', 'b', 'd', 'e', 'c', 'f'], ans)
 
-    def test_bfs_stack(self):
-        ans = bfs_stack(create_tree())
+    def test_bfs_queue(self):
+        ans = bfs_queue(create_tree())
         # print(ans)
         self.assertEqual(['a', 'b', 'c', 'd', 'e', 'f'], ans)
+
+    def test_bfs_includes_yes(self):
+        ans = bfs_includes(create_tree(), 'e')
+        # print(ans)
+        self.assertEqual(True, ans)
+
+    def test_bfs_includes_no(self):
+        ans = bfs_includes(create_tree(), 'z')
+        # print(ans)
+        self.assertEqual(False, ans)
 
 
 if __name__ == '__main__':
