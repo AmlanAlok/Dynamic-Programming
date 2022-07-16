@@ -45,7 +45,11 @@ def dfs_rec(node):
     # return [node.val] + [left_val] + [right_val]    # Incorrect way
 
 
-"""Stack DFS"""
+'''
+Stack DFS
+TC = n
+SC = n
+'''
 
 
 def dfs_stack(node):
@@ -72,6 +76,36 @@ def dfs_stack(node):
     return result
 
 
+'''
+Stack BFS
+TC = n 
+SC = n
+'''
+
+
+def bfs_stack(node):
+    if node is None:
+        return []
+
+    from collections import deque
+    stack = deque()
+    result = []
+
+    stack.append(node)
+
+    while len(stack) > 0:
+
+        last_node = stack.popleft()
+        result.append(last_node.val)
+
+        if last_node.left:
+            stack.append(last_node.left)
+        if last_node.right:
+            stack.append(last_node.right)
+
+    return result
+
+
 class MyTestCase(unittest.TestCase):
 
     def test_dfs_rec(self):
@@ -83,6 +117,11 @@ class MyTestCase(unittest.TestCase):
         ans = dfs_stack(create_tree())
         # print(ans)
         self.assertEqual(['a', 'b', 'd', 'e', 'c', 'f'], ans)
+
+    def test_bfs_stack(self):
+        ans = bfs_stack(create_tree())
+        # print(ans)
+        self.assertEqual(['a', 'b', 'c', 'd', 'e', 'f'], ans)
 
 
 if __name__ == '__main__':
