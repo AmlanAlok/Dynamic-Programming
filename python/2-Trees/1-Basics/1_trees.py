@@ -106,57 +106,19 @@ def bfs_queue(node):
     return result
 
 
-def bfs_includes(node, c):
-
-    if node is None:
-        return []
-
-    from collections import deque
-    queue = deque()
-
-    queue.append(node)
-
-    while len(queue) > 0:
-
-        first_node = queue.popleft()
-
-        if first_node.val == c:
-            return True
-
-        if first_node.left:
-            queue.append(first_node.left)
-        if first_node.right:
-            queue.append(first_node.right)
-
-    return False
-
-
 class MyTestCase(unittest.TestCase):
 
     def test_dfs_rec(self):
         ans = dfs_rec(create_tree())
-        # print(ans)
         self.assertEqual(['a', 'b', 'd', 'e', 'c', 'f'], ans)
 
     def test_dfs_stack(self):
         ans = dfs_stack(create_tree())
-        # print(ans)
         self.assertEqual(['a', 'b', 'd', 'e', 'c', 'f'], ans)
 
     def test_bfs_queue(self):
         ans = bfs_queue(create_tree())
-        # print(ans)
         self.assertEqual(['a', 'b', 'c', 'd', 'e', 'f'], ans)
-
-    def test_bfs_includes_yes(self):
-        ans = bfs_includes(create_tree(), 'e')
-        # print(ans)
-        self.assertEqual(True, ans)
-
-    def test_bfs_includes_no(self):
-        ans = bfs_includes(create_tree(), 'z')
-        # print(ans)
-        self.assertEqual(False, ans)
 
 
 if __name__ == '__main__':
