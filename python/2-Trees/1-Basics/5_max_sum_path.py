@@ -39,14 +39,28 @@ def max_sum_path(node, s):
 
 
 '''Better Code'''
+
+
 def max_path(node):
     if node is None:
-        return 0
+        return -sys.maxsize
 
     left = max_path(node.left)
     right = max_path(node.right)
 
+    if max(left, right) == -sys.maxsize:
+        return node.val
     return node.val + max(left, right)
+
+
+def alvin_max_path(node):
+    if node is None:
+        return -sys.maxsize
+    if node.left is None and node.right is None:
+        return node.val
+
+    max_child = max(alvin_max_path(node.left), alvin_max_path(node.right))
+    return node.val + max_child
 
 
 class MyTestCase(unittest.TestCase):
@@ -61,6 +75,10 @@ class MyTestCase(unittest.TestCase):
 
     def test_max_sum_path_bottom_up_none(self):
         self.assertEqual(0, max_path(None))
+
+    def test_max_sum_path_bottom_up_alvin(self):
+        root = create_num_tree()
+        self.assertEqual(20, alvin_max_path(root))
 
     def test_max_sum_path_none(self):
         self.assertEqual(0, max_sum_path(None, 0))
