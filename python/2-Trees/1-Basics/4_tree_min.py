@@ -26,11 +26,15 @@ def create_num_tree():
 
     return a
 
-
+'''
+TC = n
+SC = n
+'''
 def dfs_min(node):
     if node is None:
         return sys.maxsize
-    return min(node.val, min(dfs_min(node.left), dfs_min(node.right)))
+    # return min(node.val, min(dfs_min(node.left), dfs_min(node.right)))
+    return min([node.val, dfs_min(node.left), dfs_min(node.right)])
 
 
 def bfs_min(node):
@@ -61,6 +65,9 @@ class MyTestCase(unittest.TestCase):
     def test_dfs_min(self):
         root = create_num_tree()
         self.assertEqual(1, dfs_min(root))
+
+    def test_dfs_min_none(self):
+        self.assertEqual(9223372036854775807, dfs_min(None))
 
     def test_bfs_min(self):
         root = create_num_tree()
