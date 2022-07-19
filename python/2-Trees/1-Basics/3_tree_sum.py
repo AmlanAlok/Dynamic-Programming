@@ -2,11 +2,11 @@ import unittest
 from Node import *
 
 """
-    a
+    3
    / \
-  b   c
+  11  4
  / \   \
-d   e   f
+4   2   1
 """
 
 
@@ -27,6 +27,9 @@ def create_num_tree():
     return a
 
 
+'''My code'''
+
+
 def dfs_tree_sum(node):
     return recur(node, 0)
 
@@ -39,6 +42,15 @@ def recur(node, s):
     right = recur(node.right, left_sum)
 
     return right
+
+
+''' Better code '''
+
+
+def dfs_tree_sum_02(node):
+    if node is None:
+        return 0
+    return node.val + dfs_tree_sum_02(node.left) + dfs_tree_sum_02(node.right)
 
 
 def bfs_tree_sum(node):
@@ -71,6 +83,14 @@ class MyTestCase(unittest.TestCase):
 
     def test_dfs_tree_sum_none(self):
         ans = dfs_tree_sum(None)
+        self.assertEqual(0, ans)
+
+    def test_dfs_tree_sum_02(self):
+        ans = dfs_tree_sum_02(create_num_tree())
+        self.assertEqual(25, ans)
+
+    def test_dfs_tree_sum_02_none(self):
+        ans = dfs_tree_sum_02(None)
         self.assertEqual(0, ans)
 
     def test_bfs_tree_sum(self):
