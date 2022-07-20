@@ -74,7 +74,7 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(20, max_path(root))
 
     def test_max_sum_path_bottom_up_none(self):
-        self.assertEqual(0, max_path(None))
+        self.assertEqual(-sys.maxsize, max_path(None))
 
     def test_max_sum_path_bottom_up_alvin(self):
         root = create_num_tree()
