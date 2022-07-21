@@ -49,6 +49,23 @@ def dfs_recur(g, src):
     return p
 
 
+def bfs_queue(g, src):
+    from collections import deque
+    q = deque()
+    q.append(src)
+
+    p = []
+
+    while len(q) > 0:
+        fn = q.popleft()
+        p.append(fn)
+
+        for n in g[fn]:
+            q.append(n)
+
+    return p
+
+
 class MyTestCase(unittest.TestCase):
 
     def test_dfs_stack(self):
@@ -56,6 +73,9 @@ class MyTestCase(unittest.TestCase):
 
     def test_dfs_recur(self):
         self.assertEqual(['a', 'c', 'e', 'b', 'd', 'f'], dfs_recur(get_graph(), 'a'))
+
+    def test_bfs_queue(self):
+        self.assertEqual(['a', 'c', 'b', 'e', 'd', 'f'], bfs_queue(get_graph(), 'a'))
 
 
 if __name__ == '__main__':
