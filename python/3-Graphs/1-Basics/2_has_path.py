@@ -1,6 +1,12 @@
 import unittest
+'''
+n = # nodes
+e = # edges
+TC = O(e) bcuz you will have to travel through every single edge of our graph
+SC = O(n) bcuz you will have to have every single node on the stack
+'''
 
-
+# adjacency lust
 def get_graph():
 
     return {
