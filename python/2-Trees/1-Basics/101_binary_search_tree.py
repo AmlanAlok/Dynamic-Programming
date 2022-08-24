@@ -28,21 +28,49 @@ def insert(root, val):
     return root
 
 
+# def two_children(root, val):
+#     print('two child scenario')
+#     inorder_sequence = inorder(root)
+#
+#     replacement_value = None
+#
+#     for i, v in enumerate(inorder_sequence):
+#         if v == val:
+#             replacement_value = inorder_sequence[i + 1]
+#
+#     deletion(root, replacement_value)
+#     root.val = replacement_value
+
+
 def deletion(root, val):
 
     if root is None:
         return root
     elif val == root.val:
         if root.left is None and root.right is None:
+            print('no children')
             root = None
         elif root.left is not None:
+            print('single child on left')
             root.val = root.left.val
             root.left = None
         elif root.right is not None:
+            print('single child on right')
             root.val = root.right.val
             root.right = None
         elif root.left is not None and root.right is not None:
+            # two_children(root, val)
             print('two child scenario')
+            inorder_sequence = inorder(root)
+
+            replacement_value = None
+
+            for i, v in enumerate(inorder_sequence):
+                if v == val:
+                    replacement_value = inorder_sequence[i + 1]
+
+            deletion(root, replacement_value)
+            root.val = replacement_value
     elif val < root.val:
         root.left = deletion(root.left, val)
     elif val > root.val:
@@ -121,45 +149,26 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual([1, 4, 7, 6, 3, 14, 10, 8], post_order(self.root))
 
     def test_search(self):
-        root = None
-        root = insert(root, 8)
-        root = insert(root, 3)
-        root = insert(root, 1)
-        root = insert(root, 6)
-        root = insert(root, 7)
-        root = insert(root, 10)
-        root = insert(root, 14)
-        root = insert(root, 4)
 
         inorder_nums = [1, 3, 4, 6, 7, 8, 10, 14]
         for i in inorder_nums:
-            self.assertEqual(True, search(root, i))
+            self.assertEqual(True, search(self.root, i))
 
         not_in_nums = [2, 5, 9, 11, 12, 13, 15]
         for i in not_in_nums:
-            self.assertEqual(False, search(root, i))
+            self.assertEqual(False, search(self.root, i))
 
     def test_deletion(self):
-        root = None
-        root = insert(root, 8)
-        root = insert(root, 3)
-        root = insert(root, 1)
-        root = insert(root, 6)
-        root = insert(root, 7)
-        root = insert(root, 10)
-        root = insert(root, 14)
-        root = insert(root, 4)
 
-        print(inorder(root))
-
-        # x = deletion(root, 10)
-        self.assertEqual([1, 3, 4, 6, 7, 8, 10, 14], inorder(root))
-        self.assertEqual([1, 3, 4, 6, 7, 8, 14], inorder(deletion(root, 10)))
-        self.assertEqual([1, 3, 6, 7, 8, 14], inorder(deletion(root, 4)))
-
-        # print(inorder(x))
-
-
+        self.assertEqual([1, 3, 4, 6, 7, 8, 10, 14], inorder(self.root))
+        '''Delete both child'''
+        self.assertEqual([1, 4, 6, 7, 8, 10, 14], inorder(deletion(self.root, 3)))
+        '''Delete right child'''
+        self.assertEqual([1, 4, 6, 7, 8, 14], inorder(deletion(self.root, 10)))
+        '''Delete left child'''
+        self.assertEqual([4, 6, 7, 8, 14], inorder(deletion(self.root, 1)))
+        # '''Delete left node'''
+        # self.assertEqual([4, 6, 8, 14], inorder(deletion(self.root, 7)))
 
 
 if __name__ == '__main__':
