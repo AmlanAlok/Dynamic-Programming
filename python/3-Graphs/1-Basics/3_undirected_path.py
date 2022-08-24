@@ -12,8 +12,8 @@ def get_edges():
 
     return edges
 
-
-def make_adjacency_list(edges):
+# make adjacency list
+def build_graph(edges):
 
     d = {}
 
@@ -34,7 +34,6 @@ def add_edges(x, y, d):
     return d
 
 
-
 def dfs_undirected_graph(edges, src, dst):
     pass
 
@@ -42,7 +41,7 @@ def dfs_undirected_graph(edges, src, dst):
 class MyTestCase(unittest.TestCase):
 
     def test_something(self):
-        adj_list = make_adjacency_list(edges=get_edges())
+        adj_list = build_graph(edges=get_edges())
         self.assertEqual({
             'i': ['j', 'k'],
             'j': ['i'],
