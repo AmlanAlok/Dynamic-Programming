@@ -1,6 +1,7 @@
 import unittest
 
 
+# TC = 2^n, SC = n
 def fib_recur(n):
     if n <= 2:
         return 1
@@ -8,6 +9,7 @@ def fib_recur(n):
     return ans
 
 
+# TC = n, SC = n (Memoization brings TC down from exponential to linear)
 def fib_memo(n, memo=None):
     if memo is None:
         memo = {}
