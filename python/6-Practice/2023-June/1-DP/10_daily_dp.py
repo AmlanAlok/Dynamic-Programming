@@ -62,6 +62,92 @@ def can_sum_memo(t, nums, memo=None):
     return False
 
 
+def how_sum_memo(t, nums, memo=None):
+    if memo is None:
+        memo = {}
+    if t in memo:
+        return memo[t]
+    if t == 0:
+        return []
+    if t < 0:
+        return None
+
+    for n in nums:
+        v = how_sum_memo(t-n, nums, memo)
+        if v is not None:
+            v = v + [n]
+            memo[t] = v
+            return v
+
+    memo[t] = None
+    return None
+
+
+def best_sum_memo(t, nums, memo=None):
+    if memo is None:
+        memo = {}
+    if t in memo:
+        return memo[t]
+    if t == 0:
+        return []
+    if t < 0:
+        return None
+
+    ans = None
+
+    for n in nums:
+        v = best_sum_memo(t-n, nums, memo)
+        if v is not None:
+            new_v = v + [n]
+            if ans is None or len(new_v) < len(ans):
+                ans = new_v
+    memo[t] = ans
+    return ans
+
+
+def can_construct_memo(t, words, memo=None):
+    if memo is None:
+        memo = {}
+    if t in memo:
+        return memo[t]
+    if t == '':
+        return True
+
+    for w in words:
+        start = t[:len(w)]
+        if start == w:
+            remainder = t[len(w):]
+            ans = can_construct_memo(remainder, words, memo)
+            if ans:
+                memo[remainder] = True
+                return True
+    memo[t] = False
+    return False
+
+
+def count_construct_memo(t, words, memo=None):
+    if memo is None:
+        memo = {}
+    if t in memo:
+        return memo[t]
+    if t == '':
+        return 1
+
+    count = 0
+
+    for w in words:
+        start = t[:len(w)]
+        if start == w:
+            remainder = t[len(w):]
+            count += count_construct_memo(remainder, words, memo)
+    memo[t] = count
+    return count
+
+
+def all_construct_memo(t, words, memo=None):
+    pass
+
+
 class MyTestCase(unittest.TestCase):
 
     def test_1(self):
@@ -79,6 +165,76 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(True, can_sum_memo(7, [2, 3]))
         self.assertEqual(False, can_sum_memo(7, [2, 4]))
         self.assertEqual(False, can_sum_memo(300, [7, 14]))
+
+    def test_4(self):
+        self.assertEqual([4, 3], how_sum_memo(7, [5, 3, 4, 7]))
+        self.assertEqual([3, 2, 2], how_sum_memo(7, [2, 3]))
+        self.assertEqual([4, 3], how_sum_memo(7, [5, 3, 4, 7]))
+        self.assertEqual(None, how_sum_memo(7, [2, 4]))
+        self.assertEqual([3, 2], how_sum_memo(5, [2, 3]))
+        self.assertEqual(None, how_sum_memo(300, [7, 14]))
+        self.assertEqual([100, 100, 100], how_sum_memo(300, [100, 7, 14]))
+        self.assertEqual([3, 2, 2], how_sum_memo(7, [2, 3]))
+
+    def test_5(self):
+        self.assertEqual([7], best_sum_memo(7, [5, 3, 4, 7]))
+        self.assertEqual([5, 3], best_sum_memo(8, [2, 3, 5]))
+        self.assertEqual([4, 4], best_sum_memo(8, [1, 4, 5]))
+        self.assertEqual([25, 25, 25, 25], best_sum_memo(100, [1, 2, 5, 25]))
+
+    def test_6(self):
+        self.assertEqual(True, can_construct_memo('abcdef', ['ab', 'abc', 'cd', 'def', 'abcd']))
+        self.assertEqual(False, can_construct_memo("skateboard", ["skat", "te", "bor", "ard"]))
+        self.assertEqual(True, can_construct_memo("banana", ["ba", "pa", "ca", "na"]))
+        self.assertEqual(True, can_construct_memo('', ["ba", "pa", "ca", "na"]))
+        self.assertEqual(False, can_construct_memo("potato", ["pot", "ta", "to"]))
+        self.assertEqual(True, can_construct_memo("skateboard", ["skat", "te", "e", "bo", "ard"]))
+        self.assertEqual(False, can_construct_memo('eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef', [
+            'e',
+            'ee',
+            'eee',
+            'eeee',
+            'eeeee',
+            'eeeeee',
+            'eeeeeee',
+            'eeeeeeee'
+        ]))
+
+    def test_7(self):
+        self.assertEqual(2, count_construct_memo('abcdef', ['a', 'abc', 'cd', 'def', 'abcd', 'ef']))
+        self.assertEqual(1, count_construct_memo('abcdef', ['ab', 'abc', 'cd', 'def', 'abcd']))
+        self.assertEqual(3, count_construct_memo('abcdef', ['ab', 'abc', 'cd', 'def', 'abcd', 'ef']))
+        self.assertEqual(0, count_construct_memo("skateboard", ["skat", "te", "bor", "ard"]))
+        self.assertEqual(0, count_construct_memo('eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeef', [
+            'e',
+            'ee',
+            'eee',
+            'eeee',
+            'eeeee',
+            'eeeeee',
+            'eeeeeee',
+            'eeeeeeee'
+        ]))
+
+    def test_8(self):
+
+        self.assertEqual([
+            ['abc', 'def'],
+            ['abc', 'd', 'ef'],
+            ['abcd', 'ef']
+        ],  all_construct_memo('abcdef', ['abc', 'cd', 'def', 'abcd', 'ef', 'd']))
+
+        self.assertEqual([
+            ['purp', 'le'],
+            ['p', 'ur', 'p', 'le']
+        ], all_construct_memo("purple", ['purp', 'p', 'ur', 'le', 'purpl']))
+
+        self.assertEqual([
+            ['ab', 'cd', 'ef'],
+            ['ab', 'c', 'def'],
+            ['abc', 'def'],
+            ['abcd', 'ef']
+        ], all_construct_memo("abcdef", ['ab', 'abc', 'cd', 'def', 'abcd', 'ef', 'c']))
 
 
 if __name__ == '__main__':
