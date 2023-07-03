@@ -42,12 +42,7 @@ def grid_traveler_memo(m, n, memo=None):
     if m == 0 or n == 0:
         return 0
 
-    if m > 0:
-        a = grid_traveler_memo(m - 1, n, memo)
-    if n > 0:
-        b = grid_traveler_memo(m, n - 1, memo)
-
-    ans = a + b
+    ans = grid_traveler_memo(m - 1, n, memo) + grid_traveler_memo(m, n - 1, memo)
     memo[(m, n)] = ans
 
     return ans
@@ -64,27 +59,93 @@ def can_sum_memo(t, nums, memo=None):
         return False
 
     for n in nums:
-        if can_sum_memo(t-n, nums, memo):
-            memo[t-n] = True
+        if can_sum_memo(t - n, nums, memo):
+            memo[t - n] = True
             return True
     memo[t] = False
     return False
 
 
 def how_sum_memo(t, nums, memo=None):
-    pass
+    if memo is None:
+        memo = {}
+    if t < 0:
+        return None
+    if t in memo:
+        return memo[t]
+    if t == 0:
+        return []
+
+    for n in nums:
+        v = how_sum_memo(t - n, nums, memo)
+        memo[t - n] = v
+        if v is not None:
+            new_v = v + [n]
+            return new_v
+    return None
 
 
 def best_sum_memo(t, nums, memo=None):
-    pass
+    if memo is None:
+        memo = {}
+    if t < 0:
+        return None
+    if t in memo:
+        return memo[t]
+    if t == 0:
+        return []
+
+    ans = None
+
+    for n in nums:
+        v = best_sum_memo(t-n, nums, memo)
+        if v is not None:
+            new_v = v + [n]
+            if ans is None or len(ans) > len(new_v):
+                ans = new_v
+
+    memo[t] = ans
+    return ans
 
 
 def can_construct_memo(t, words, memo=None):
-    pass
+    if memo is None:
+        memo = {}
+    if t in memo:
+        return memo[t]
+    if t == '':
+        return True
+
+    for w in words:
+        start = t[:len(w)]
+        if start == w:
+            new_t = t[len(w):]
+            ans = can_construct_memo(new_t, words, memo)
+            if ans:
+                memo[new_t] = ans
+                return True
+    memo[t] = False
+    return False
 
 
 def count_construct_memo(t, words, memo=None):
-    pass
+    if memo is None:
+        memo = {}
+    if t in memo:
+        return memo[t]
+    if t == '':
+        return 1
+
+    count = 0
+
+    for w in words:
+        start = t[:len(w)]
+        if start == w:
+            new_t = t[len(w):]
+            count += count_construct_memo(new_t, words, memo)
+    memo[t] = count
+    return count
+
 
 
 def all_construct_memo(t, words, memo=None):
