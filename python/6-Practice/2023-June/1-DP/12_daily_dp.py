@@ -107,15 +107,66 @@ def best_sum_memo(t, nums, memo=None):
 
 
 def can_construct_memo(t, words, memo=None):
-    pass
+    if memo is None:
+        memo = {}
+    if t in memo:
+        return memo[t]
+    if t == '':
+        return True
+
+    for s in words:
+        if s == t[:len(s)]:
+            new_t = t[len(s):]
+            ans = can_construct_memo(new_t, words, memo)
+            if ans:
+                memo[new_t] = True
+                return True
+    memo[t] = False
+    return False
 
 
 def count_construct_memo(t, words, memo=None):
-    pass
+    if memo is None:
+        memo = {}
+    if t in memo:
+        return memo[t]
+    if t == '':
+        return 1
+
+    count = 0
+
+    for s in words:
+        if s == t[:len(s)]:
+            new_t = t[len(s):]
+            count += count_construct_memo(new_t, words, memo)
+    memo[t] = count
+    return count
 
 
 def all_construct_memo(t, words, memo=None):
-    pass
+    if memo is None:
+        memo = {}
+    if t in memo:
+        return memo[t]
+    if t == '':
+        return [[]]
+
+    ans = []
+
+    for w in words:
+        if w == t[:len(w)]:
+            new_t = t[len(w):]
+            v = (all_construct_memo(new_t, words, memo))
+
+            for a in v:
+                a.insert(0, w)
+            for b in v:
+                ans.append(b)
+    return ans
+
+
+
+
 
 
 class MyTestCase(unittest.TestCase):

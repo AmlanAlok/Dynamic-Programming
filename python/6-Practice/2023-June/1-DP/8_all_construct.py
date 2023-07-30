@@ -21,7 +21,13 @@ def all_construct(t, words):
                 ans.append(b)
     return ans
 
-
+'''
+If we do not use deepcopy, the ans var returned in the last line of the func 
+is referenced as v in the parent function.
+So when we manipulate the var v, it changes the memo[t] value which was the ans.
+Without deepcopy, ans and v reference the same memory address.
+Hence, manipulating one changes the common data.
+'''
 def all_construct_memo(t, words, memo=None):
     if memo is None:
         memo = {}
