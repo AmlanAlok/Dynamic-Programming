@@ -156,7 +156,7 @@ def all_construct_memo(t, words, memo=None):
     for w in words:
         if w == t[:len(w)]:
             new_t = t[len(w):]
-            v = (all_construct_memo(new_t, words, memo))
+            v = deepcopy(all_construct_memo(new_t, words, memo))
 
             for a in v:
                 a.insert(0, w)
