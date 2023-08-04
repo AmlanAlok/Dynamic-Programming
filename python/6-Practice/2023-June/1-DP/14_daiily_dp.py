@@ -20,23 +20,90 @@ fib_dict = {
 
 
 def fib_memo(n, memo=None):
-    pass
+    if memo is None:
+        memo = {}
+    if n in memo:
+        return memo[n]
+    if n <= 2:
+        return 1
+
+    val = fib_memo(n-1, memo) + fib_memo(n-2, memo)
+    memo[n] = val
+    return val
 
 
 def grid_traveler_memo(m, n, memo=None):
-    pass
+    if memo is None:
+        memo = {}
+    if (m, n) in memo:
+        return memo[(m, n)]
+    if m == 0 or n == 0:
+        return 0
+    if m == 1 and n == 1:
+        return 1
+
+    val = grid_traveler_memo(m-1, n, memo) + grid_traveler_memo(m, n-1, memo)
+    memo[(m, n)] = val
+    return val
 
 
 def can_sum_memo(t, nums, memo=None):
     pass
+    if memo is None:
+        memo = {}
+    if t in memo:
+        return memo[t]
+    if t == 0:
+        return True
+    if t < 0:
+        return False
+
+    for n in nums:
+        if can_sum_memo(t-n, nums, memo):
+            memo[t] = True
+            return True
+    memo[t] = False
+    return False
 
 
 def how_sum_memo(t, nums, memo=None):
-    pass
+    if memo is None:
+        memo = {}
+    if t in memo:
+        return memo[t]
+    if t == 0:
+        return []
+    if t < 0:
+        return None
+
+    for n in nums:
+        v = how_sum_memo(t-n, nums, memo)
+        memo[t-n] = v
+        if v is not None:
+            return v + [n]
+    return None
 
 
 def best_sum_memo(t, nums, memo=None):
-    pass
+    if memo is None:
+        memo = {}
+    if t in memo:
+        return memo[t]
+    if t == 0:
+        return []
+    if t < 0:
+        return None
+
+    best = None
+
+    for n in nums:
+        v = best_sum_memo(t-n, nums, memo)
+        memo[t-n] = v
+        if v is not None:
+            v_new = v + [n]
+            if best is None or len(v_new) < len(best):
+                best = v_new
+    return best
 
 
 def can_construct_memo(t, words, memo=None):
@@ -47,28 +114,9 @@ def count_construct_memo(t, words, memo=None):
     pass
 
 
+
 def all_construct_memo(t, words, memo=None):
-    if memo is None:
-        memo = {}
-    if t in memo:
-        return memo[t]
-    if t == '':
-        return [[]]
-
-    ans = []
-
-    for w in words:
-        if w == t[:len(w)]:
-            new_t = t[len(w):]
-            v = deepcopy(all_construct_memo(new_t, words, memo))
-
-            for a in v:
-                a.insert(0, w)
-            for b in v:
-                ans.append(b)
-
-    memo[t] = ans
-    return ans
+    pass
 
 
 class MyTestCase(unittest.TestCase):
