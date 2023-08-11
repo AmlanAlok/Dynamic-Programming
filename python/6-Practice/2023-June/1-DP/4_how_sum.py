@@ -10,8 +10,9 @@ def how_sum(t, nums):
     for n in nums:
         v = how_sum(t-n, nums)
         if v is not None:
-            v.append(n)
-            return v
+            # v.append(n)
+            new_v = v + [n]
+            return new_v
 
     return
 
@@ -30,8 +31,9 @@ def how_sum_memo(t, nums, memo=None):
         v = how_sum_memo(t-n, nums, memo)
         memo[t-n] = v
         if v is not None:
-            v.append(n)
-            return v
+            # v.append(n)
+            new_v = v + [n]
+            return new_v
 
     return
 
