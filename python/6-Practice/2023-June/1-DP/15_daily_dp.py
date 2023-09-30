@@ -118,17 +118,68 @@ def best_sum_memo(t, nums, memo=None):
     return ans
 
 
-
 def can_construct_memo(t, words, memo=None):
-    pass
+    if memo is None:
+        memo = {}
+    if t in memo:
+        return memo[t]
+    if t is '':
+        return True
+
+    for s in words:
+        if s == t[:len(s)]:
+            t_new = t[len(s):]
+
+            if can_construct_memo(t_new, words, memo):
+                memo[t_new] = True
+                return True
+
+    memo[t] = False
+    return False
 
 
 def count_construct_memo(t, words, memo=None):
-    pass
+    if memo is None:
+        memo = {}
+    if t in memo:
+        return memo[t]
+    if t is '':
+        return 1
+
+    ans = 0
+
+    for s in words:
+        if s == t[:len(s)]:
+            t_new = t[len(s):]
+            ans += count_construct_memo(t_new, words, memo)
+
+    memo[t] = ans
+    return ans
 
 
 def all_construct_memo(t, words, memo=None):
-    pass
+    if memo is None:
+        memo = {}
+    if t in memo:
+        return memo[t]
+    if t is '':
+        return [[]]
+
+    ans = []
+
+    for s in words:
+        if s == t[:len(s)]:
+            t_new = t[len(s):]
+
+            v = deepcopy(all_construct_memo(t_new, words, memo))
+
+            for a in v:
+                a.insert(0, s)
+            for b in v:
+                ans.append(b)
+
+    memo[t] = ans
+    return ans
 
 
 class MyTestCase(unittest.TestCase):
