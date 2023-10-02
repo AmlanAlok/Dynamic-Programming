@@ -79,6 +79,8 @@ def how_sum_memo(t, nums, memo=None):
     if t < 0:
         return
 
+    v = None
+
     for n in nums:
         new_t = t-n
 
