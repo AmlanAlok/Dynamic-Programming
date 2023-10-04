@@ -33,19 +33,86 @@ def fib_memo(n, memo=None):
 
 
 def grid_traveler_memo(m, n, memo=None):
-    pass
+    if memo is None:
+        memo = {}
+    if (m, n) in memo:
+        return memo[(m, n)]
+    if m == 0 or n == 0:
+        return 0
+    if m == 1 and n == 1:
+        return 1
+
+    v = grid_traveler_memo(m-1, n, memo) + grid_traveler_memo(m, n-1, memo)
+    memo[(m, n)] = v
+    return v
 
 
 def can_sum_memo(t, nums, memo=None):
-    pass
+    if memo is None:
+        memo ={}
+    if t in memo:
+        return memo[t]
+    if t == 0:
+        return True
+    if t < 0:
+        return False
+
+    for n in nums:
+        new_t = t-n
+        v = can_sum_memo(new_t, nums, memo)
+        memo[new_t] = v
+
+        if v:
+            return True
+    return False
 
 
 def how_sum_memo(t, nums, memo=None):
-    pass
+    if memo is None:
+        memo = {}
+    if t in memo:
+        return memo[t]
+    if t == 0:
+        return []
+    if t < 0:
+        return None
+
+    for n in nums:
+        new_t = t-n
+
+        v = how_sum_memo(new_t, nums, memo)
+        memo[new_t] = v
+        if v is not None:
+            new_v = v + [n]
+            return new_v
+
+    return None
 
 
 def best_sum_memo(t, nums, memo=None):
-    pass
+    if memo is None:
+        memo = {}
+    if t in memo:
+        return memo[t]
+    if t == 0:
+        return []
+    if t < 0:
+        return None
+
+    best = None
+
+    for n in nums:
+        new_t = t-n
+
+        v = best_sum_memo(new_t, nums, memo)
+
+        if v is not None:
+            new_v = v + [n]
+            if best is None or len(new_v) < len(best):
+                best = new_v
+
+    memo[t] = best
+    return best
 
 
 def can_construct_memo(t, words, memo=None):
