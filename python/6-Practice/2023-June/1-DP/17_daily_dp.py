@@ -174,8 +174,9 @@ def all_construct_memo(t, words, memo=None):
 
             for a in v:
                 a.insert(0, w)
-            for b in v:
-                ans.append(b)
+                ans.append(a)
+            # for b in v:
+            #     ans.append(b)
 
     return ans
 
