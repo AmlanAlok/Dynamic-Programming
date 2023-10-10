@@ -165,10 +165,6 @@ def all_construct_memo(t, words, memo=None):
     return ans
 
 
-
-
-
-
 class MyTestCase(unittest.TestCase):
 
     def test_1(self):
