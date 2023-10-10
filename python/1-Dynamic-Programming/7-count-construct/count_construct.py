@@ -88,5 +88,6 @@ class MyTestCase(unittest.TestCase):
             'eeeeeeee'
         ]))
 
+
 if __name__ == '__main__':
     unittest.main()
