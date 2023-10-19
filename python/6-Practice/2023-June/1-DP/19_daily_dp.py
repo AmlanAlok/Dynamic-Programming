@@ -33,7 +33,18 @@ def fib_memo(n, memo=None):
 
 
 def grid_traveler_memo(m, n, memo=None):
-    pass
+    if memo is None:
+        memo = {}
+    if (m, n) in memo:
+        return memo[(m, n)]
+    if m == 0 or n == 0:
+        return 0
+    if m == 1 and n == 1:
+        return 1
+
+    v = grid_traveler_memo(m-1, n, memo) + grid_traveler_memo(m, n-1, memo)
+    memo[(m, n)] = v
+    return v
 
 
 def can_sum_memo(t, nums, memo=None):
