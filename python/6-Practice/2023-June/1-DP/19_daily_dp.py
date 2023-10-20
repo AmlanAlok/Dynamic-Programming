@@ -48,7 +48,22 @@ def grid_traveler_memo(m, n, memo=None):
 
 
 def can_sum_memo(t, nums, memo=None):
-    pass
+    if memo is None:
+        memo = {}
+    if t in memo:
+        return memo[t]
+    if t == 0:
+        return True
+    if t <= 0:
+        return False
+
+    for n in nums:
+        new_t = t-n
+        v = can_sum_memo(new_t, nums, memo)
+        memo[new_t] = v
+        if v:
+            return True
+    return False
 
 
 def how_sum_memo(t, nums, memo=None):
