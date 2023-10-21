@@ -67,7 +67,24 @@ def can_sum_memo(t, nums, memo=None):
 
 
 def how_sum_memo(t, nums, memo=None):
-    pass
+    if memo is None:
+        memo = {}
+    if t in memo:
+        return memo[t]
+    if t == 0:
+        return []
+    if t < 0:
+        return None
+
+    for n in nums:
+        new_t = t-n
+
+        v = how_sum_memo(new_t, nums, memo)
+        memo[new_t] = v
+        if v is not None:
+            v = v + [n]
+            return v
+    return None
 
 
 def best_sum_memo(t, nums, memo=None):
