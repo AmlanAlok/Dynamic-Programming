@@ -152,7 +152,26 @@ def count_construct_memo(t, words, memo=None):
 
 
 def all_construct_memo(t, words, memo=None):
-    pass
+    if memo is None:
+        memo = {}
+    if t in memo:
+        return memo[t]
+    if t == '':
+        return [[]]
+
+    ans = []
+
+    for w in words:
+        if w == t[:len(w)]:
+            new_t = t[len(w):]
+
+            v = deepcopy(all_construct_memo(new_t, words, memo))
+
+            for a in v:
+                a.insert(0, w)
+            for b in v:
+                ans.append(b)
+    return ans
 
 
 class MyTestCase(unittest.TestCase):
