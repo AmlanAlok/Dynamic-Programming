@@ -54,7 +54,7 @@ def all_construct(t, words, memo=None):
 class MyTestCase(unittest.TestCase):
 
     def test_1(self):
-        for i in range(len(fib)):
+        for i in range(len(fib_n)):
             n = fib_n[i]
             self.assertEqual(fib(n), fib_dict[n])
 
