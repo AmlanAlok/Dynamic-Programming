@@ -89,7 +89,29 @@ def how_sum(t, nums, memo=None):
 
 
 def best_sum(t, nums, memo=None):
-    pass
+    if memo is None:
+        memo = {}
+    if t in memo:
+        return memo[t]
+    if t == 0:
+        return []
+    if t < 0:
+        return None
+
+    ans = None
+
+    for n in nums:
+        new_t = t-n
+
+        v = best_sum(new_t, nums, memo)
+
+        if v is not None:
+            v = v + [n]
+            # v.append(n)   # using this will fail the code as
+            if ans is None or len(v) < len(ans):
+                ans = v
+    memo[t] = ans
+    return ans
 
 
 def can_construct(t, words, memo=None):
