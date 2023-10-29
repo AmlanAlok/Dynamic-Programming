@@ -108,6 +108,8 @@ def best_sum(t, nums, memo=None):
         if v is not None:
             v = v + [n]
             # v.append(n)   # using this will fail the code as
+            # print(v)
+            # new_v = deepcopy(v)
             if ans is None or len(v) < len(ans):
                 ans = v
     memo[t] = ans
@@ -115,7 +117,23 @@ def best_sum(t, nums, memo=None):
 
 
 def can_construct(t, words, memo=None):
-    pass
+    if memo is None:
+        memo = {}
+    if t in memo:
+        return memo[t]
+    if t == '':
+        return True
+
+    for w in words:
+        if w == t[:len(w)]:
+            new_t = t[len(w):]
+
+            v = can_construct(new_t, words, memo)
+            memo[new_t] = v
+
+            if v:
+                return True
+    return False
 
 
 def count_construct(t, words, memo=None):
