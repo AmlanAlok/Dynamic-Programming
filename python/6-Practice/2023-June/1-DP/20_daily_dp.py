@@ -144,6 +144,7 @@ def all_construct(t, words, memo=None):
     pass
 
 
+
 class MyTestCase(unittest.TestCase):
 
     def test_1(self):
