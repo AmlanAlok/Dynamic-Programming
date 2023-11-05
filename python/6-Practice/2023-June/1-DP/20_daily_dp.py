@@ -137,7 +137,23 @@ def can_construct(t, words, memo=None):
 
 
 def count_construct(t, words, memo=None):
-    pass
+    if memo is None:
+        memo = {}
+    if t in memo:
+        return memo[t]
+    if t == '':
+        return 1
+
+    count = 0
+
+    for w in words:
+        if w == t[:len(w)]:
+            new_t = t[len(w):]
+
+            count += count_construct(new_t, words, memo)
+
+    memo[t] = count
+    return count
 
 
 def all_construct(t, words, memo=None):
