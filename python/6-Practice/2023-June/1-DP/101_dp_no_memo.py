@@ -59,6 +59,7 @@ class MyTestCase(unittest.TestCase):
             self.assertEqual(fib(n), fib_dict[n])
 
     def test_2(self):
+        x = 'P'.lower()
         self.assertEqual(3, grid_traveler(2, 3))
         self.assertEqual(6, grid_traveler(3, 3))
         self.assertEqual(35345263800, grid_traveler(20, 20))
